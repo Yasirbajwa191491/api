@@ -1,199 +1,77 @@
-import React from "react";
-import image from "./images/me2.jpg";
-import resume from "./images/resume.pdf";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const mystate = useSelector((state) => state.Reducer.comData);
+  const isLoading = useSelector((state) => state.Reducer.isLoading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const fetchData = async () => {
+    try {
+      dispatch({
+        type: "isLoading",
+      });
+      const res = await fetch("https://jsonplaceholder.typicode.com/comments");
+      const data = await res.json();
+      dispatch({
+        type: "GET_DATA",
+        payload: {
+          comData: data,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteHandler = async (id) => {
+    dispatch({
+      type: "DELETE",
+      payload: id,
+    });
+  };
+  useEffect(() => {
+    fetchData();
+    console.log(mystate);
+  }, []);
+  if(isLoading){
+    return <h1 className="text-center my-5">Loading....</h1>
+  }
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <h1
-            className="mt-5 "
-            style={{
-              color: "#696969",
-              fontWeight: "bold",
-              textShadow: "2px 2px red",
-            }}
-          >
-            Yasir Sohail
-          </h1>
-          <h5>MERN Stack Developer && React js Developer</h5>
-          <p>
-            Hi, I’m Yasir Sohail from Faisalabad, Pakistan. I’m A MERN Stack
-            Developer and React js Developer and also proficient in React Native
-            as well. I have been studying web development for last 2 years. I
-            have been studying in BS Computer Science as well in Government
-            College University Faisalabad. Now I have a lot of control over MERN
-            Stack, react js, Next js, React Native, Redux, Node js, Express js,
-            Mongoose, MongoDB and Restful Api’s.
-          </p>
-          <a
-            href={resume}
-            className="btn btn-outline-primary w-25 h-25 my-3 rounded-3"
-            download={"Yasir resume.pdf"}
-          >
-            Download resume
-          </a>
-
-          <img src={image} alt="logo" />
-          <hr />
-          <h5>My Skills</h5>
-          <div className="progress  my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              React JS :
-            </span>
-            <div
-              className="progress-bar bg-success"
-              role="progressbar"
-              style={{ width: "90%" }}
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Express JS:
-            </span>
-            <div
-              className="progress-bar bg-info"
-              role="progressbar"
-              style={{ width: "90%" }}
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              MongoDB:
-            </span>
-            <div
-              className="progress-bar bg-warning"
-              role="progressbar"
-              style={{ width: "85%" }}
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Node js:
-            </span>
-            <div
-              className="progress-bar bg-danger"
-              role="progressbar"
-              style={{ width: "90%" }}
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress  my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Next JS :
-            </span>
-            <div
-              className="progress-bar bg-success"
-              role="progressbar"
-              style={{ width: "60%" }}
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              JavaScript:
-            </span>
-            <div
-              className="progress-bar bg-info"
-              role="progressbar"
-              style={{ width: "75%" }}
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              React Native:
-            </span>
-            <div
-              className="progress-bar bg-warning"
-              role="progressbar"
-              style={{ width: "65%" }}
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Html and CSS:
-            </span>
-            <div
-              className="progress-bar bg-danger"
-              role="progressbar"
-              style={{ width: "90%" }}
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress  my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Git, Github and GitLab :
-            </span>
-            <div
-              className="progress-bar bg-success"
-              role="progressbar"
-              style={{ width: "70%" }}
-              aria-valuenow="25"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Redux:
-            </span>
-            <div
-              className="progress-bar bg-info"
-              role="progressbar"
-              style={{ width: "80%" }}
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Restful Api:
-            </span>
-            <div
-              className="progress-bar bg-warning"
-              role="progressbar"
-              style={{ width: "95%" }}
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-          <div className="progress my-1">
-            <span style={{ fontWeight: "bold", marginRight: "5px" }}>
-              Tailwind CSS:
-            </span>
-            <div
-              className="progress-bar bg-danger"
-              role="progressbar"
-              style={{ width: "85%" }}
-              aria-valuenow="100"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
-        </div>
+      <h1 className="text-danger my-5 text-center">Call Api with Redux</h1>
+      <button
+        className="my-2 btn btn-primary mx-5"
+        style={{ fontSize: "15px" }}
+        onClick={()=>navigate("/add")}
+      >
+        Add New
+      </button>
+      <div className="stories-div my-2">
+        {(mystate.length>0)? mystate.map((curEle) => {
+          return (
+            <div className="card" key={curEle.id}>
+              <h2 className="divtitle">
+                {curEle.id < 10 ? `#0${curEle.id}` : `#${curEle.id}`}
+              </h2>
+              <h2 className="divtitle">{curEle.name}</h2>
+              <p className="content-card">
+                By <span> {curEle.email}</span> | {curEle.body}
+              </p>
+              <div className="card-button">
+                <a
+                  href={"https://Yasirsoha.github.io/portfolio"}
+                  target="_blank"
+                >
+                  Read more
+                </a>
+                <a onClick={() => deleteHandler(curEle.id)}>Remove</a>
+              </div>
+            </div>
+          );
+        })
+        :
+            <h1 className="text-center">jhhh</h1>
+        }
       </div>
     </>
   );

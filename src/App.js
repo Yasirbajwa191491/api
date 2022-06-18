@@ -4,16 +4,17 @@ import Home from "./components/Home"
 import Navbar from "./components/Navbar"
 import About from "./components/About"
 import Contact from "./components/Contact"
-import Portfolio from "./components/Portfolio"
 import Error from "./components/Error"
 import Footer from './components/Footer'
+import Add from './components/Add'
+
 const App = () => {
   return (
     <>
     <Navbar />
     <Routes>
-      <Route path="/portfol" element={<Home />} />
-      <Route path='/project' element={<Portfolio />} />
+      <Route path="/redux" element={<Home />} />
+      <Route path='/add' element={<Add />} />
       <Route path='/about' element={<About />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='*' element={<Error />} />
