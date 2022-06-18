@@ -13,7 +13,7 @@ const App = () => {
     <>
     <Navbar />
     <Routes>
-      <Route path="/redux" element={<Home />} />
+      <Route path="/ApiWithRedux" element={<Home />} />
       <Route path='/add' element={<Add />} />
       <Route path='/about' element={<About />} />
       <Route path='/contact' element={<Contact />} />

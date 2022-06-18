@@ -31,7 +31,6 @@ const Home = () => {
   };
   useEffect(() => {
     fetchData();
-    console.log(mystate);
   }, []);
   if(isLoading){
     return <h1 className="text-center my-5">Loading....</h1>
@@ -61,10 +60,12 @@ const Home = () => {
                 <a
                   href={"https://Yasirsoha.github.io/portfolio"}
                   target="_blank"
+                  rel="noreferrer" 
                 >
                   Read more
                 </a>
-                <a onClick={() => deleteHandler(curEle.id)}>Remove</a>
+                <a onClick={() => deleteHandler(curEle.id)}
+                href="#">Remove</a>
               </div>
             </div>
           );
